@@ -1,3 +1,5 @@
+namespace SchedulerProj.Models;
+
 public class Scheduler {
     public int Id { get; }
     public string Name { get; set; }
