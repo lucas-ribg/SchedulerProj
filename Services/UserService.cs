@@ -29,10 +29,7 @@ public static class UserService
     {
         var index = Users.FindIndex(u => u.Id == user.Id);
         if (index == -1) 
-        {
-            Console.WriteLine("User don't exists!");
             return;
-        }
         Users[index] = user;
     }
 
