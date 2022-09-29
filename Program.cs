@@ -1,9 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using SchedulerProj.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+//Add services to the container
+var connectionStringMysql = builder.Configuration.GetConnectionString("ConnectionMysql");
+builder.Services.AddDbContext<Context>(options => options.UseMySql(
+        connectionStringMysql,
+        Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.28-mysql")
+    )
+);
 
+builder.Services.AddControllersWithViews();
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -17,9 +26,15 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllers(
+    //name: "default",
+    //pattern: "{controller=Home}/{action=Index}/{id?}"
+);
 
 app.Run();
