@@ -1,4 +1,5 @@
 appsettings.json
-bin
-obj
-.vscode
+appsettings.Development.json
+bin/
+obj/
+.vscode/
